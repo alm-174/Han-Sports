@@ -55,6 +55,24 @@
                                 <hr/>
                                 <form:form method="post" action="/admin/product/create" modelAttribute="newProduct"
                                            class="row" enctype="multipart/form-data">
+
+                                    <c:set var="errorName">
+                                        <form:errors path="name" cssClass="invalid-feedback" />
+                                    </c:set>
+                                    <c:set var="errorPrice">
+                                        <form:errors path="price" cssClass="invalid-feedback" />
+                                    </c:set>
+                                    <c:set var="errorDetailDesc">
+                                        <form:errors path="detailDesc" cssClass="invalid-feedback" />
+                                    </c:set>
+                                    <c:set var="errorShortDesc">
+                                        <form:errors path="shortDesc" cssClass="invalid-feedback" />
+                                    </c:set>
+                                    <c:set var="errorQuantity">
+                                        <form:errors path="quantity" cssClass="invalid-feedback" />
+                                    </c:set>
+
+
                                     <div class="mb-3 col-12 col-md-6">
                                         <label class="form-label">Name:</label>
                                         <form:input type="text" class="form-control" path="name"/>

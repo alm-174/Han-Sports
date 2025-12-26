@@ -3,8 +3,10 @@ package com.javaweb.controller.admin;
 import com.javaweb.domain.Product;
 import com.javaweb.service.ProductService;
 import com.javaweb.service.UploadService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,8 +37,14 @@ public class ProductController {
     }
 
     @PostMapping("/admin/product/create")
-    public String postCreateProduct(Model model, @ModelAttribute("newProduct") Product newProduct,
+    public String postCreateProduct(Model model, @ModelAttribute("newProduct") @Valid Product newProduct,
+                                    BindingResult newProductBindingResult,
                                     @RequestParam("imageFile")MultipartFile file){
+        if(newProductBindingResult.hasErrors()){
+            return "admin/product/create";
+        }
+
+
         String image = this.uploadService.HandleSaveUpLoadFile(file, "products");
         newProduct.setImage(image);
         this.productService.handleSaveProduct(newProduct);
@@ -67,8 +75,14 @@ public class ProductController {
     }
 
     @PostMapping("/admin/product/update")
-    public String postUpdateProduct(Model model, @ModelAttribute("newProduct") Product newProduct,
+    public String postUpdateProduct(Model model, @ModelAttribute("newProduct") @Valid Product newProduct,
+                                    BindingResult newProductBindingResult,
                                     @RequestParam("imageFile") MultipartFile file){
+        if(newProductBindingResult.hasErrors()){
+            return "admin/product/update";
+        }
+
+
         String image = this.uploadService.HandleSaveUpLoadFile(file, "products");
         Optional<Product> optinalProduct = this.productService.fetchProductById(newProduct.getId());
         if(optinalProduct.isPresent()){

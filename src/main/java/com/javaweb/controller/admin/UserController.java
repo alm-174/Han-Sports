@@ -85,8 +85,14 @@ public class UserController {
     }
 
     @PostMapping("admin/user/update")
-    public String handleUpdateUser(@ModelAttribute("newUser") User currentUser, Model model,
+    public String handleUpdateUser(@ModelAttribute("newUser") @Valid User currentUser,
+                                   BindingResult newProductBindingResult,
+                                   Model model,
                                    @RequestParam("avatarFile") MultipartFile file) {
+        if (newProductBindingResult.hasErrors()) {
+            return "admin/user/update";
+        }
+
         String avatar = this.uploadService.HandleSaveUpLoadFile(file, "avatars");
         Optional<User> optionalUser = this.userService.fetchUserById(currentUser.getId());
         if (optionalUser.isPresent()) {
