@@ -4,9 +4,11 @@ import com.javaweb.domain.User;
 import com.javaweb.service.UploadService;
 import com.javaweb.service.UserService;
 
+import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,9 +44,14 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String handleCreateUser(@ModelAttribute("newUser") User user,
+    public String handleCreateUser(@ModelAttribute("newUser") @Valid User user,
+                                   BindingResult newUserBindingResult,
                                    @RequestParam("avatarFile") MultipartFile file) {
 
+
+        if (newUserBindingResult.hasErrors()) {
+            return "admin/user/create";
+        }
 
         String avatar = this.uploadService.HandleSaveUpLoadFile(file, "avatars");
         String hashPassword = this.passwordEncoder.encode(user.getPassword());
