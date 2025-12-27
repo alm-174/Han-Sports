@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!doctype html>
 <html lang="en">
@@ -8,8 +9,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HAN SPORTS</title>
-    <link rel="shortcut icon" type="image/png" href="/admin/images/logos/favicon.png" />
-    <link rel="stylesheet" href="/admin/css/styles.min.css" />
+    <link rel="shortcut icon" type="image/png" href="/admin/images/logos/logo.jsp"/>
+    <link rel="stylesheet" href="/admin/css/styles.min.css"/>
 </head>
 
 <body>
@@ -23,29 +24,60 @@
                 <div class="col-md-8 col-lg-6 col-xxl-3">
                     <div class="card mb-0">
                         <div class="card-body">
-                            <a href="/" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                                <img src="/admin/images/logos/logo.svg" alt="">
-                            </a>
-                            <p class="text-center">chao mung quy khach</p>
-                            <form>
-                                <div class="mb-3">
-                                    <label for="exampleInputtext1" class="form-label">Full Name</label>
-                                    <input type="text" class="form-control" id="exampleInputtext1" aria-describedby="textHelp">
+                            <div class="text-center">
+                                <a href="/" class="text-nowrap logo-img"
+                                   style="font-size:32px; font-weight:900; color:#000080; letter-spacing:1px;">
+                                    HAN SPORTS
+                                </a>
+                            </div>
+                            <p class="text-center">Chào Mừng Quý Khách</p>
+                            <form:form method="post" action="/register">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3 mb-md-0">
+                                            <input class="form-control" id="inputFirstName"
+                                                   type="text" placeholder="Enter your first name"/>
+                                            <label for="inputFirstName">First name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input class="form-control" id="inputLastName"
+                                                   type="text" placeholder="Enter your last name"/>
+                                            <label for="inputLastName">Last name</label>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Email Address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" type="email"
+                                           placeholder="name@example.com" path="email"/>
+                                    <label>Email address</label>
                                 </div>
-                                <div class="mb-4">
-                                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3 mb-md-0">
+                                            <input class="form-control" id="inputPassword"
+                                                   type="password" placeholder="Create a password"/>
+                                            <label for="inputPassword">Password</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3 mb-md-0">
+                                            <input class="form-control" id="inputPasswordConfirm"
+                                                   type="password" placeholder="Confirm password"/>
+                                            <label for="inputPasswordConfirm">Confirm
+                                                Password</label>
+                                        </div>
+                                    </div>
                                 </div>
-                                <a href="./index.html" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign Up</a>
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
-                                    <a class="text-primary fw-bold ms-2" href="./authentication-login.html">Sign In</a>
+                                <div class="mt-4 mb-0">
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary btn-block">
+                                            Create Account
+                                        </button>
+                                    </div>
                                 </div>
-                            </form>
+                            </form:form>
                         </div>
                     </div>
                 </div>
