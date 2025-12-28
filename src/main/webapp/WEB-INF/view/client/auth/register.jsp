@@ -31,33 +31,33 @@
                                 </a>
                             </div>
                             <p class="text-center">Chào Mừng Quý Khách</p>
-                            <form:form method="post" action="/register">
+                            <form:form method="post" action="/register" modelAttribute="registerDTO">
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3 mb-md-0">
-                                            <input class="form-control" id="inputFirstName"
-                                                   type="text" placeholder="Enter your first name"/>
+                                            <form:input class="form-control" id="inputFirstName"
+                                                   type="text" path="firstName"/>
                                             <label for="inputFirstName">First name</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input class="form-control" id="inputLastName"
-                                                   type="text" placeholder="Enter your last name"/>
+                                            <form:input class="form-control" id="inputLastName"
+                                                   type="text" path="lastName"/>
                                             <label for="inputLastName">Last name</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" type="email"
+                                    <form:input class="form-control" type="email"
                                            placeholder="name@example.com" path="email"/>
                                     <label>Email address</label>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3 mb-md-0">
-                                            <input class="form-control" id="inputPassword"
-                                                   type="password" placeholder="Create a password"/>
+                                            <form:input class="form-control" id="inputPassword"
+                                                   type="password" path="password"/>
                                             <label for="inputPassword">Password</label>
                                         </div>
                                     </div>
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="mt-4 mb-0">
                                     <div class="d-grid">
-                                        <button class="btn btn-primary btn-block">
+                                        <button type="submit" class="btn btn-primary btn-block">
                                             Create Account
                                         </button>
                                     </div>

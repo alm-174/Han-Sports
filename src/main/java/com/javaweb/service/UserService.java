@@ -2,6 +2,7 @@ package com.javaweb.service;
 
 import com.javaweb.domain.Role;
 import com.javaweb.domain.User;
+import com.javaweb.domain.dto.RegisterDTO;
 import com.javaweb.repository.RoleRepository;
 import com.javaweb.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -44,4 +45,13 @@ public class UserService {
     public void  handleDeleteUserById(long ìd){
         this.userRepository.deleteById(ìd);
     }
+
+    public User registerDTOtoUser(RegisterDTO registerDTO){
+        User user = new User();
+        user.setFullName(registerDTO.getFirstName() +  registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+        return user;
+    }
+
 }
