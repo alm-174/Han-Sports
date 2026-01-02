@@ -1,10 +1,11 @@
 package com.javaweb.service.validator;
 
+import com.javaweb.domain.dto.RegisterDTO;
+import com.javaweb.service.UserService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.stereotype.Service;
-import vn.hoidanit.laptopshop.domain.dto.RegisterDTO;
-import vn.hoidanit.laptopshop.service.UserService;
+
 
 @Service
 public class RegisterValidator implements ConstraintValidator<RegisterChecked, RegisterDTO> {

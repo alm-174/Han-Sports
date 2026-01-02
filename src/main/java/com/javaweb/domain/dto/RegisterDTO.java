@@ -1,9 +1,10 @@
 package com.javaweb.domain.dto;
 
+import com.javaweb.service.validator.RegisterChecked;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 
-
+@RegisterChecked
 public class RegisterDTO {
     @Size(min = 3, message = "FirstName phải có tối thiểu 3 ký tự")
     private String firstName;
