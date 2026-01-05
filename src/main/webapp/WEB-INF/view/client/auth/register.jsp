@@ -32,6 +32,10 @@
                             </div>
                             <p class="text-center">Chào Mừng Quý Khách</p>
                             <form:form method="post" action="/register" modelAttribute="registerDTO">
+                                <input type="hidden"
+                                       name="${_csrf.parameterName}"
+                                       value="${_csrf.token}"/>
+
                                 <c:set var="errorPassword">
                                     <form:errors path="confirmPassword"
                                                  cssClass="invalid-feedback" />
@@ -93,7 +97,7 @@
                                 </div>
                                 <div class="mt-4 mb-0">
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary btn-block">
+                                        <button class="btn btn-primary btn-block">
                                             Create Account
                                         </button>
                                     </div>
