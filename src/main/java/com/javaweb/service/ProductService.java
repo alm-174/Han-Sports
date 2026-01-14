@@ -2,6 +2,8 @@ package com.javaweb.service;
 
 
 import com.javaweb.domain.Product;
+import com.javaweb.repository.CartDetailRepository;
+import com.javaweb.repository.CartRepository;
 import com.javaweb.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +12,13 @@ import java.util.Optional;
 
 @Service
 public class ProductService {
+    private final CartRepository cartRepository;
+    private final CartDetailRepository cartDetailRepository;
 
     private final ProductRepository productRepository;
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(CartRepository cartRepository, CartDetailRepository cartDetailRepository, ProductRepository productRepository) {
+        this.cartRepository = cartRepository;
+        this.cartDetailRepository = cartDetailRepository;
         this.productRepository = productRepository;
     }
 
@@ -35,5 +41,10 @@ public class ProductService {
     {
         this.productRepository.deleteById(id);
     }
+
+    public void hanldeAddProductToCart(){
+        
+    }
+
 
 }

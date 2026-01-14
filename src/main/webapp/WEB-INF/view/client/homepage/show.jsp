@@ -1,8 +1,8 @@
-    <%@page contentType="text/html" pageEncoding="UTF-8" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
-    <!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -11,8 +11,8 @@
     <meta name="author" content="Untree.co">
     <link rel="shortcut icon" href="favicon.png">
 
-    <meta name="description" content="" />
-    <meta name="keywords" content="bootstrap, bootstrap4" />
+    <meta name="description" content=""/>
+    <meta name="keywords" content="bootstrap, bootstrap4"/>
 
     <!-- Bootstrap CSS -->
     <link href="client/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
 
 <body>
 
-<jsp:include page="../layout/header.jsp" />
+<jsp:include page="../layout/header.jsp"/>
 
 <!-- Start Hero Section -->
 <div class="hero" style="background-color: navy;">
@@ -35,12 +35,13 @@
                     <h1>HAN <span clsas="d-block">Sports</span></h1>
                     <p class="mb-4">Thế giới đồ thể thao chính hãng.</p>
                     <p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#"
-                                                                                class="btn btn-white-outline">Explore</a></p>
+                                                                                class="btn btn-white-outline">Explore</a>
+                    </p>
                 </div>
             </div>
             <div class="col-lg-7">
                 <div class="hero-img-wrap">
-<%--                    <img src="client/images/logo.png" class="img-fluid">--%>
+                    <%--                    <img src="client/images/logo.png" class="img-fluid">--%>
                 </div>
             </div>
         </div>
@@ -62,21 +63,25 @@
             </div>
             <!-- End Column 1 -->
             <c:forEach var="product" items="${products}" begin="0" end="2">
-            <!-- Start Column 2 -->
-            <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                <a class="product-item" href="/product/${product.id}">
-                    <img src="admin/images/products/${product.image}" class="img-fluid product-thumbnail">
-                    <h3 class="product-title">${product.name}</h3>
-                    <strong class="product-price">
-                        <fmt:formatNumber type="number" value="${product.price}" /> đ
-                    </strong>
+                <!-- Start Column 2 -->
+                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                    <a class="product-item" href="/product/${product.id}">
+                        <img src="admin/images/products/${product.image}" class="img-fluid product-thumbnail">
+                        <h3 class="product-title">${product.name}</h3>
+                        <strong class="product-price">
+                            <fmt:formatNumber type="number" value="${product.price}"/> đ
+                        </strong>
+                        <form action="/add-product-to-cart/${product.id}" method="post">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-                    <span class="icon-cross">
-							<img src="client/images/cross.svg" class="img-fluid">
-						</span>
-                </a>
-            </div>
-            <!-- End Column 2 -->
+                            <button class="icon-cross">
+                                <img src="client/images/cross.svg" class="img-fluid">
+                            </button>
+                        </form>
+
+                    </a>
+                </div>
+                <!-- End Column 2 -->
 
             </c:forEach>
 
@@ -86,8 +91,7 @@
 <!-- End Product Section -->
 
 
-
-<jsp:include page="../layout/footer.jsp" />
+<jsp:include page="../layout/footer.jsp"/>
 
 
 <script src="client/js/bootstrap.bundle.min.js"></script>
