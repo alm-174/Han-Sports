@@ -15,9 +15,9 @@
         <div class="collapse navbar-collapse" id="navbarsFurni">
             <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
-                <li><a class="nav-link" href="shop.html">Shop</a></li>
+                <li><a class="nav-link" href="/product">Shop</a></li>
             </ul>
             <c:if test="${not empty pageContext.request.userPrincipal}">
                 <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
@@ -26,15 +26,15 @@
                             <a href="#" class="nav-link dropdown" role="button" id="dropdownMenuLink"
                                data-bs-toggle="dropdown" aria-expanded="false" data-bs-toggle="dropdown"
                                aria-expanded="false">
-                                <img src="client/images/user.svg">
+                                <img src="/client/images/user.svg">
                             </a>
 
                             <ul class="dropdown-menu dropdown-menu-end p-4" aria-labelledby="dropdownMenuLink">
                                 <li class="d-flex align-items-center flex-column" style="min-width: 200px;">
                                     <img style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden;"
-                                         src="/images/product/1711078092373-asus-01.png"/>
+                                         src="/admin/images/avatars/${sessionScope.avatar}"/>
                                     <div class="text-center my-3">
-                                        <c:out value="${pageContext.request.userPrincipal.name}" />
+                                        <c:out value="${sessionScope.fullName}" />
                                     </div>
                                 </li>
 
@@ -56,13 +56,13 @@
 
 
                     </li>
-                    <li><a class="nav-link" href="cart.html"><img src="client/images/cart.svg"></a></li>
+                    <li><a class="nav-link" href="cart.html"><img src="/client/images/cart.svg"></a></li>
                 </ul>
             </c:if>
             <c:if test="${empty pageContext.request.userPrincipal}">
-                <button  href="/login" class="btn btn-warning">
+                <a href="/login" class="btn btn-warning">
                     Đăng nhập
-                </button>
+                </a>
             </c:if>
         </div>
     </div>

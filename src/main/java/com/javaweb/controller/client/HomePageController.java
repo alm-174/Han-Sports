@@ -1,7 +1,9 @@
 package com.javaweb.controller.client;
 
+import com.javaweb.domain.Product;
 import com.javaweb.domain.User;
 import com.javaweb.domain.dto.RegisterDTO;
+import com.javaweb.service.ProductService;
 import com.javaweb.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,19 +14,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class HomePageController {
 
+    private final ProductService productService;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    public HomePageController(UserService userService, PasswordEncoder passwordEncoder) {
+    public HomePageController(ProductService productService, UserService userService, PasswordEncoder passwordEncoder) {
+        this.productService = productService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/")
-    public String homePage() {
+    public String homePage(Model model) {
+
+        List<Product> products = productService.fetchAllProducts();
+        model.addAttribute("products", products);
         return "client/homepage/show";
     }
 

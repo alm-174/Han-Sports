@@ -14,7 +14,7 @@ public class Product {
     private long id;
 
     @NotNull
-    @Min(value = 3, message = "Tên phải có tối thiểu 3 ký tự")
+    @NotEmpty(message = "Tên sản phẩm không được để trống")
     private String name;
 
     @NotNull
