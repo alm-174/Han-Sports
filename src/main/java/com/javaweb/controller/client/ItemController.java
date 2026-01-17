@@ -82,8 +82,13 @@ public class ItemController {
     @PostMapping("/confirm-checkout")
     public String getCheckOutPage(@ModelAttribute("cart") Cart cart) {
         List<CartDetail> cartDetails = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetails();
-        //this.productService.handleUpdateCartBeforeCheckout(cartDetails);
+        this.productService.handleUpdateCartBeforeCheckout(cartDetails);
         return "redirect:/checkout";
+    }
+
+    @GetMapping("/checkout")
+    public String getCheckOutPage(){
+        return "client/cart/checkout";
     }
 
 
