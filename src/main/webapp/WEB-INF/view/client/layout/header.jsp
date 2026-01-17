@@ -5,7 +5,7 @@
 <nav class="navbar navbar-expand-md navbar-dark" aria-label="Furni navigation bar" style="background-color: navy;">
 
     <div class="container">
-        <a class="navbar-brand fs-2 fw-bold" href="index.html">Han Sports<span>.</span></a>
+        <a class="navbar-brand fs-2 fw-bold" href="/">Han Sports<span>.</span></a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni"
                 aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,7 +56,19 @@
 
 
                     </li>
-                    <li><a class="nav-link" href="cart.html"><img src="/client/images/cart.svg"></a></li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="/cart">
+                            <img src="/client/images/cart.svg" alt="Cart">
+
+                            <span
+                                    class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
+
+                                    style="top: -5px; right: -10px; height: 20px; min-width: 20px;">
+                                    ${sessionScope.sum}
+                            </span>
+                        </a>
+                    </li>
+
                 </ul>
             </c:if>
             <c:if test="${empty pageContext.request.userPrincipal}">

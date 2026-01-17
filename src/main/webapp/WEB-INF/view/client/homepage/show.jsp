@@ -34,7 +34,7 @@
                 <div class="intro-excerpt">
                     <h1>HAN <span clsas="d-block">Sports</span></h1>
                     <p class="mb-4">Thế giới đồ thể thao chính hãng.</p>
-                    <p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#"
+                    <p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="/product"
                                                                                 class="btn btn-white-outline">Explore</a>
                     </p>
                 </div>

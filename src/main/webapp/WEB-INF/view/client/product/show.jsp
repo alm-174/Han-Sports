@@ -39,9 +39,13 @@
                         <fmt:formatNumber type="number" value="${product.price}" /> đ
                     </strong>
 
-                    <span class="icon-cross">
-								<img src="images/cross.svg" class="img-fluid">
-							</span>
+                    <form action="/add-product-to-cart/${product.id}" method="post">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                        <button class="icon-cross">
+                            <img src="client/images/cross.svg" class="img-fluid">
+                        </button>
+                    </form>
                 </a>
             </div>
             <!-- End Column 1 -->

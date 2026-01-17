@@ -1,73 +1,71 @@
-(function() {
-	'use strict';
+(function ($) {
+    'use strict';
 
-	var tinyslider = function() {
-		var el = document.querySelectorAll('.testimonial-slider');
+    var tinyslider = function () {
+        var el = document.querySelectorAll('.testimonial-slider');
+        if (el.length > 0) {
+            tns({
+                container: '.testimonial-slider',
+                items: 1,
+                axis: "horizontal",
+                controlsContainer: "#testimonial-nav",
+                swipeAngle: false,
+                speed: 700,
+                nav: true,
+                controls: true,
+                autoplay: true,
+                autoplayHoverPause: true,
+                autoplayTimeout: 3500,
+                autoplayButtonOutput: false
+            });
+        }
+    };
+    tinyslider();
 
-		if (el.length > 0) {
-			var slider = tns({
-				container: '.testimonial-slider',
-				items: 1,
-				axis: "horizontal",
-				controlsContainer: "#testimonial-nav",
-				swipeAngle: false,
-				speed: 700,
-				nav: true,
-				controls: true,
-				autoplay: true,
-				autoplayHoverPause: true,
-				autoplayTimeout: 3500,
-				autoplayButtonOutput: false
-			});
-		}
-	};
-	tinyslider();
+    $(document).ready(function () {
 
-	
+        $('.quantity').on('click', '.btn-plus, .btn-minus', function () {
 
+            const button = $(this);
+            const input = button.closest('.quantity').find('input');
 
-	var sitePlusMinus = function() {
+            let quantity = parseInt(input.val());
+            const price = parseFloat(input.data('cart-detail-price'));
+            const id = input.data('cart-detail-id');
 
-		var value,
-    		quantity = document.getElementsByClassName('quantity-container');
-
-		function createBindings(quantityContainer) {
-	      var quantityAmount = quantityContainer.getElementsByClassName('quantity-amount')[0];
-	      var increase = quantityContainer.getElementsByClassName('increase')[0];
-	      var decrease = quantityContainer.getElementsByClassName('decrease')[0];
-	      increase.addEventListener('click', function (e) { increaseValue(e, quantityAmount); });
-	      decrease.addEventListener('click', function (e) { decreaseValue(e, quantityAmount); });
-	    }
-
-	    function init() {
-	        for (var i = 0; i < quantity.length; i++ ) {
-						createBindings(quantity[i]);
-	        }
-	    };
-
-	    function increaseValue(event, quantityAmount) {
-	        value = parseInt(quantityAmount.value, 10);
-
-	        console.log(quantityAmount, quantityAmount.value);
-
-	        value = isNaN(value) ? 0 : value;
-	        value++;
-	        quantityAmount.value = value;
-	    }
-
-	    function decreaseValue(event, quantityAmount) {
-	        value = parseInt(quantityAmount.value, 10);
-
-	        value = isNaN(value) ? 0 : value;
-	        if (value > 0) value--;
-
-	        quantityAmount.value = value;
-	    }
-	    
-	    init();
-		
-	};
-	sitePlusMinus();
+            if (button.hasClass('btn-plus')) {
+                quantity++;
+            } else {
+                quantity = quantity > 1 ? quantity - 1 : 1;
+            }
 
 
-})()
+            input.val(quantity);
+
+
+            input.val(quantity);
+
+            const index = input.attr("data-cart-detail-index"); // NEW
+            const el = document.getElementById(`cartDetails${index}.quantity`); // NEW
+            if (el) {                                            // NEW
+                $(el).val(quantity);                              // NEW
+            }
+
+
+            const rowTotal = $(`td[data-cart-detail-id='${id}']`);
+            rowTotal.text((price * quantity).toLocaleString() + ' đ');
+
+            let cartTotal = 0;
+            $('.quantity input').each(function () {
+                cartTotal += parseInt($(this).val()) *
+                    parseFloat($(this).data('cart-detail-price'));
+            });
+
+            $('[data-cart-total-price]')
+                .text(cartTotal.toLocaleString() + ' đ')
+                .attr('data-cart-total-price', cartTotal);
+        });
+
+    });
+
+})(jQuery);
