@@ -48,6 +48,8 @@
     <div class="container">
 <%--        <c:if test="${not empty cartDetails}">--%>
             <form:form action="/place-order" method="post" modelAttribute="cart">
+                <input type="hidden" name="${_csrf.parameterName}"
+                       value="${_csrf.token}" />
                 <div class="row">
                     <div class="col-md-6 mb-5 mb-md-0">
                         <h2 class="h3 mb-3 text-black">Billing Details</h2>
@@ -56,7 +58,7 @@
                                 <div class="col-md-12">
                                     <label for="c_lname" class="text-black">Full Name <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="receiverName"
-                                           placeholder="Full Name">
+                                           placeholder="Full Name" required>
                                 </div>
                             </div>
 
@@ -64,7 +66,7 @@
                                 <div class="col-md-12">
                                     <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="c_address" name="receiverAddress"
-                                           placeholder="Street address">
+                                           placeholder="Street address" required>
                                 </div>
                             </div>
 
@@ -73,7 +75,7 @@
                                     <label for="c_phone" class="text-black">Phone <span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="c_phone" name="receiverPhone"
-                                           placeholder="Phone Number">
+                                           placeholder="Phone Number" required>
                                 </div>
                             </div>
 
@@ -91,21 +93,24 @@
                                         <th>Total</th>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>Top Up T-Shirt <strong class="mx-2">x</strong> 1</td>
-                                            <td>$250.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Polo Shirt <strong class="mx-2">x</strong> 1</td>
-                                            <td>$100.00</td>
-                                        </tr>
+                                        <c:forEach var="cartDetail" items="${cartDetails}">
+                                            <tr>
+                                                <td>${cartDetail.product.name} <strong class="mx-2">x</strong> ${cartDetail.quantity}</td>
+                                                <td>
+                                                    <fmt:formatNumber type="number" value="${cartDetail.quantity * cartDetail.price}"/> đ</td>
+                                            </tr>
+                                        </c:forEach>
+
+
                                         <tr>
                                             <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
-                                            <td class="text-black">$350.00</td>
+                                            <td class="text-black">0đ</td>
                                         </tr>
                                         <tr>
                                             <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
-                                            <td class="text-black font-weight-bold"><strong>$350.00</strong></td>
+                                            <td class="text-black font-weight-bold"><strong>
+                                                <fmt:formatNumber type="number" value="${totalPrice}"/> đ
+                                            </strong></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -113,7 +118,7 @@
 
                                     <div class="form-group">
                                         <button class="btn btn-black btn-lg py-3 btn-block"
-                                                onclick="window.location='thankyou.html'">Place Order
+                                                type="submit">Place Order
                                         </button>
                                     </div>
 
