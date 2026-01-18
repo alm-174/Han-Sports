@@ -3,6 +3,8 @@ package com.javaweb.service;
 import com.javaweb.domain.Role;
 import com.javaweb.domain.User;
 import com.javaweb.domain.dto.RegisterDTO;
+import com.javaweb.repository.OrderRepository;
+import com.javaweb.repository.ProductRepository;
 import com.javaweb.repository.RoleRepository;
 import com.javaweb.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -15,10 +17,14 @@ public class UserService {
 
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+    private final ProductRepository productRepository;
+    private final OrderRepository orderRepository;
 
-    public UserService(UserRepository userRepository,  RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, ProductRepository productRepository, OrderRepository orderRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
     }
 
     public User createUser(User user){
@@ -60,6 +66,18 @@ public class UserService {
 
     public User getUserByEmail(String email){
         return this.userRepository.findByEmail(email);
+    }
+
+    public long countUsers() {
+        return this.userRepository.count();
+    }
+
+    public long countProducts() {
+        return this.productRepository.count();
+    }
+
+    public long countOrders() {
+        return this.orderRepository.count();
     }
 
 }

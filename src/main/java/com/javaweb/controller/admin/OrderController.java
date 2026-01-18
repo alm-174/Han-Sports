@@ -6,7 +6,9 @@ import com.javaweb.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,5 +36,36 @@ public class OrderController {
             model.addAttribute("orderDetails", orderDetails);
         }
         return "admin/order/detail";
+    }
+
+    @GetMapping("/admin/order/update/{id}")
+    public String getUpdateOrder(Model model, @PathVariable long id){
+        Optional<Order> order = this.orderService.fetchOrderById(id);
+        if(order.isPresent()){
+            model.addAttribute("newOrder", order.get());
+        }
+        return  "admin/order/update";
+    }
+
+    @PostMapping("/admin/order/update")
+    public String postUpdateOrder(Model model, @ModelAttribute("newOrder") Order order){
+        this.orderService.hanldeUpdateOrder(order);
+        return "redirect:/admin/order";
+    }
+
+    @GetMapping("/admin/order/delete/{id}")
+    public String getDeleteOrder(Model model, @PathVariable long id){
+        Optional<Order> order = this.orderService.fetchOrderById(id);
+        if(order.isPresent()){
+            model.addAttribute("newOrder", order.get());
+            model.addAttribute("id", id);
+        }
+        return "admin/order/delete";
+    }
+
+    @PostMapping("/admin/order/delete")
+    public String postDeleteOrder(Model model, @ModelAttribute("newOrder") Order order){
+        this.orderService.hanldeDeleteOrder(order);
+        return "redirect:/admin/order";
     }
 }
