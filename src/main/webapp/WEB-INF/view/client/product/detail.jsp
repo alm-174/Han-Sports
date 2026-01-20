@@ -45,26 +45,34 @@
                         <fmt:formatNumber type="number" value="${product.price}"/> đ
 
                     </h5>
-                    <div class="d-flex mb-4">
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
+
                     <p class="mb-4">
                         ${product.shortDesc}
                     </p>
 
-                    <div class="input-group mb-3 d-flex align-items-center quantity-container">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-black decrease" type="button">&minus;</button>
+
+                    <div class="input-group mb-3 d-flex align-items-center quantity "
+                         style="max-width: 120px;">
+                        <div class="input-group-btn">
+                            <button type="button"
+                                    class="btn btn-outline-black btn-minus">
+                                <i class="fa fa-minus"></i>
+                            </button>
                         </div>
-                        <input type="text" class="form-control text-center quantity-amount" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-black increase" type="button">&plus;</button>
+                        <input type="text"
+                               class="form-control form-control-sm text-center border-0"
+                               value="1"
+                               data-cart-detail-id="1"
+                               data-cart-detail-price="12000"
+                        >
+                        <div class="input-group-btn">
+                            <button type="button"
+                                    class="btn btn-outline-black btn-plus">
+                                <i class="fa fa-plus"></i>
+                            </button>
                         </div>
                     </div>
+
                     <form action="/add-product-from-view-detail" method="post"
                           modelAttribute="product">
                         <input type="hidden" name="${_csrf.parameterName}"

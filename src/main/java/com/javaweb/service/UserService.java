@@ -7,6 +7,8 @@ import com.javaweb.repository.OrderRepository;
 import com.javaweb.repository.ProductRepository;
 import com.javaweb.repository.RoleRepository;
 import com.javaweb.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,6 +40,10 @@ public class UserService {
 
     public List<User> findAll(){
         return this.userRepository.findAll();
+    }
+
+    public Page<User> findAll(Pageable pageable){
+        return this.userRepository.findAll(pageable);
     }
 
     public Optional<User> fetchUserById(Long id){

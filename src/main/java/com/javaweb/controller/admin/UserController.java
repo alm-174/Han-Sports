@@ -5,6 +5,9 @@ import com.javaweb.service.UploadService;
 import com.javaweb.service.UserService;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,9 +34,22 @@ public class UserController {
 
 
     @GetMapping("/admin/user")
-    public String getUserPage(Model model) {
-        List<User> listUsers = this.userService.findAll();
+    public String getUserPage(Model model, @RequestParam("page") Optional<String> optionalPage) {
+        int page = 1;
+        try{
+            if(optionalPage.isPresent()){
+                page = Integer.parseInt(optionalPage.get());
+            }
+        }catch(Exception ex){
+
+        }
+
+        Pageable pageable = PageRequest.of(page-1, 4);
+        Page<User> users = this.userService.findAll(pageable);
+        List<User> listUsers = users.getContent();
         model.addAttribute("users", listUsers);
+        model.addAttribute("totalPages", users.getTotalPages());
+        model.addAttribute("currentPage", page);
         return "admin/user/show";
     }
 

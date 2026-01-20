@@ -67,5 +67,50 @@
         });
 
     });
+    $(document).ready(function () {
+
+        $('#btnFilter').click(function (event) {
+            event.preventDefault();
+
+            let factoryArr = [];
+            let targetArr = [];
+            let priceArr = [];
+
+            $("#factoryFilter .form-check-input:checked").each(function () {
+                factoryArr.push($(this).val());
+            });
+
+            $("#targetFilter .form-check-input:checked").each(function () {
+                targetArr.push($(this).val());
+            });
+
+            $("#priceFilter .form-check-input:checked").each(function () {
+                priceArr.push($(this).val());
+            });
+
+            let sortValue = $('input[name="radio-sort"]:checked').val();
+
+            const currentUrl = new URL(window.location.href);
+            const searchParams = currentUrl.searchParams;
+
+            searchParams.set('page', '1');
+            if (sortValue) searchParams.set('sort', sortValue);
+
+            factoryArr.length
+                ? searchParams.set('brand', factoryArr.join(','))
+                : searchParams.delete('brand');
+
+            targetArr.length
+                ? searchParams.set('target', targetArr.join(','))
+                : searchParams.delete('target');
+
+            priceArr.length
+                ? searchParams.set('price', priceArr.join(','))
+                : searchParams.delete('price');
+
+            window.location.href = currentUrl.toString();
+        });
+    });
+
 
 })(jQuery);
