@@ -96,6 +96,10 @@
             searchParams.set('page', '1');
             if (sortValue) searchParams.set('sort', sortValue);
 
+            searchParams.delete('brand');
+            searchParams.delete('target');
+            searchParams.delete('price');
+
             factoryArr.length
                 ? searchParams.set('brand', factoryArr.join(','))
                 : searchParams.delete('brand');

@@ -25,14 +25,16 @@
 <body>
 
 <jsp:include page="../layout/header.jsp"/>
+
+
 <div class="untree_co-section product-section before-footer-section">
     <div class="container">
         <div class="row g-4 fruite">
             <div class="col-12 col-md-4">
                 <div class="row g-4">
-                    <div class="col-12"  id="factoryFilter">
+                    <div class="col-12" id="factoryFilter">
                         <div class="mb-2"><b>Hãng sản xuất</b></div>
-                        <div class="form-check form-check-inline" >
+                        <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="factory-1"
                                    value="YONEX">
                             <label class="form-check-label" for="factory-1">Yonex</label>
@@ -111,7 +113,7 @@
                             <label class="form-check-label" for="price-5">Trên 3 triệu</label>
                         </div>
                     </div>
-                    <div class="col-12" >
+                    <div class="col-12">
                         <div class="mb-2"><b>Sắp xếp</b></div>
 
                         <div class="form-check form-check-inline">
@@ -136,7 +138,7 @@
                     <div class="col-12">
                         <button
                                 class="btn border-secondary rounded-pill px-4 py-3 text-light text-uppercase mb-4"
-                        id="btnFilter">
+                                id="btnFilter">
                             Lọc Sản Phẩm
                         </button>
                     </div>
@@ -144,6 +146,9 @@
             </div>
             <div class="col-12 col-md-8 text-center">
                 <div class="row g-4">
+                    <c:if test="${totalPages ==  0}">
+                        <div>Không tìm thấy sản phẩm</div>
+                    </c:if>
                     <c:forEach var="product" items="${products}">
                         <!-- Start Column 1 -->
                         <div class="col-12 col-md-4 col-lg-3 mb-5">
@@ -166,29 +171,32 @@
                         <!-- End Column 1 -->
                     </c:forEach>
 
-                    <div class="pagination d-flex justify-content-center mt-5">
-                        <li class="page-item">
-                            <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
-                               href="/products?page=${currentPage - 1}" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
+
+                    <c:if test="${totalPages > 0}">
+                        <div class="pagination d-flex justify-content-center mt-5">
                             <li class="page-item">
-                                <a class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
-                                   href="/products?page=${loop.index + 1}">
-                                        ${loop.index + 1}
+                                <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
+                                   href="/products?page=${currentPage - 1}${queryString}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                        </c:forEach>
-                        <li class="page-item">
-                            <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
-                               href="/products?page=${currentPage + 1}" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
+                            <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
+                                <li class="page-item">
+                                    <a class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
+                                       href="/products?page=${loop.index + 1}${queryString}">
+                                            ${loop.index + 1}
+                                    </a>
+                                </li>
+                            </c:forEach>
+                            <li class="page-item">
+                                <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
+                                   href="/products?page=${currentPage + 1}${queryString}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
 
-                    </div>
+                        </div>
+                    </c:if>
                 </div>
             </div>
         </div>
