@@ -26,94 +26,59 @@
 
 <jsp:include page="../layout/header.jsp"/>
 
-<div class="container-fluid py-5 mt-5">
-    <div class="container py-5">
-        <div class="col-lg-8 col-xl-9">
-            <div class="row g-4">
-                <div class="col-lg-6">
-                    <div class="border rounded">
-                        <a href="#">
-                            <img src="../admin/images/products/${product.image}"
-                                 class="img-fluid rounded" alt="Image">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <h4 class="fw-bold mb-3"> ${product.name}</h4>
-                    <p class="mb-3">${product.brand}</p>
-                    <h5 class="fw-bold mb-3">
-                        <fmt:formatNumber type="number" value="${product.price}"/> đ
+<div class="container mt-5 pt-5">
+    <div class="row">
 
-                    </h5>
+        <!-- IMAGE -->
+        <div class="col-lg-6">
+            <img src="../admin/images/products/${product.image}"
+                 class="img-fluid rounded">
+        </div>
 
-                    <p class="mb-4">
-                        ${product.shortDesc}
-                    </p>
+        <!-- INFO -->
+        <div class="col-lg-6">
+            <h4 class="fw-bold">${product.name}</h4>
+            <p>${product.brand}</p>
 
+            <h5 class="fw-bold text-danger">
+                <fmt:formatNumber type="number" value="${product.price}"/> đ
+            </h5>
 
-                    <div class="input-group mb-3 d-flex align-items-center quantity "
-                         style="max-width: 120px;">
-                        <div class="input-group-btn">
-                            <button type="button"
-                                    class="btn btn-outline-black btn-minus">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                        <input type="text"
-                               class="form-control form-control-sm text-center border-0"
-                               value="1"
-                               data-cart-detail-id="1"
-                               data-cart-detail-price="12000"
-                        >
-                        <div class="input-group-btn">
-                            <button type="button"
-                                    class="btn btn-outline-black btn-plus">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
+            <p>${product.shortDesc}</p>
 
-                    <form action="/add-product-from-view-detail" method="post"
-                          modelAttribute="product">
-                        <input type="hidden" name="${_csrf.parameterName}"
-                               value="${_csrf.token}"/>
-                        <input class="form-control d-none" type="text" value="${product.id}"
-                               name="id"/>
+            <!-- QUANTITY -->
+            <div class="input-group align-items-center quantity"
+                 style="max-width: 200px;">
 
-                        <input class="form-control d-none" type="text" name="quantity"
-                               id="cartDetails0.quantity"/>
-                        <button
-                                class="btn rounded-pill px-4 py-2 mb-4"
-                                style="color:#fff; background-color:#0b3c5d; border-color:#0b3c5d;">
-                            <i class="fa fa-shopping-bag me-2"></i>
-                            Add to cart
-                        </button>
-                    </form>
+                <button type="button"
+                        class="btn btn-outline-dark btn-minus">
+                    <i class="fa fa-minus"></i>
+                </button>
 
-                </div>
-                <div class="col-lg-12">
-                    <nav>
-                        <div class="nav nav-tabs mb-3">
-                            <button class="nav-link active border-white border-bottom-0"
-                                    type="button" role="tab" id="nav-about-tab" data-bs-toggle="tab"
-                                    data-bs-target="#nav-about" aria-controls="nav-about"
-                                    aria-selected="true">Description
-                            </button>
-                        </div>
-                    </nav>
-                    <div class="tab-content mb-5">
-                        <div class="tab-pane active" id="nav-about" role="tabpanel"
-                             aria-labelledby="nav-about-tab">
-                            <p>
-                                ${product.detailDesc}
-                            </p>
+                <input type="text"
+                       class="form-control text-center"
+                       value="1"
+                       data-cart-detail-id="${product.id}"
+                       data-cart-detail-price="${product.price}"
+                       data-cart-detail-index="0">
 
-                        </div>
-
-                    </div>
-                </div>
-
+                <button type="button"
+                        class="btn btn-outline-dark btn-plus">
+                    <i class="fa fa-plus"></i>
+                </button>
             </div>
+
+            <!-- FORM ADD TO CART -->
+            <form action="/add-product-from-view-detail" method="post" class="mt-4">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                <input type="hidden" name="id" value="${product.id}">
+                <input type="hidden" name="quantity" id="cartDetails0.quantity">
+
+                <button class="btn btn-dark rounded-pill px-4">
+                    <i class="fa fa-shopping-bag me-2"></i>
+                    Add to cart
+                </button>
+            </form>
         </div>
     </div>
 </div>
@@ -121,6 +86,8 @@
 <jsp:include page="../layout/footer.jsp"/>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.x.x.min.js"></script>
 <script src="../client/js/bootstrap.bundle.min.js"></script>
 <script src="../client/js/tiny-slider.js"></script>
 <script src="../client/js/custom.js"></script>
